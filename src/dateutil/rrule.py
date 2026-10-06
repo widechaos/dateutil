@@ -1514,6 +1514,8 @@ class _rrulestr(object):
         for wday in value.split(','):
             if '(' in wday:
                 # If it's of the form TH(+1), etc.
+                if not wday.endswith(')'):
+                    raise ValueError("Invalid parenthesized BYDAY specification.")
                 splt = wday.split('(')
                 w = splt[0]
                 n = int(splt[1][:-1])
